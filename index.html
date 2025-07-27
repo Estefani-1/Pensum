@@ -29,22 +29,16 @@
     }
     .asignatura {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      margin: 0.3rem 0;
-      flex-wrap: wrap;
-    }
-    input[type="checkbox"] {
-      margin-right: 0.5rem;
-      transform: scale(1.3);
-    }
-    .completada {
-      background-color: #ce93d8;
-      padding: 0.2rem 0.5rem;
+      align-items: center;
+      margin: 5px 0;
+      padding: 5px;
       border-radius: 5px;
     }
+    .asignatura.selecta {
+      background-color: #e1bee7;
+    }
     select {
-      margin-left: 10px;
       padding: 3px;
       border-radius: 4px;
     }
@@ -66,9 +60,7 @@
     const escala = { A: 4.0, B: 3.0, C: 2.0, D: 1.0, F: 0.0 };
 
     const pensum = {
-      "0": [
-        { nombre: "ORI-100 · Orientación Universitaria", creditos: 0 }
-      ],
+      "0": [ { nombre: "ORI-100 · Orientación Universitaria", creditos: 0 } ],
       "1": [
         { nombre: "BIO-100 · Biología General", creditos: 3 },
         { nombre: "BIO-100-L · Biología General - Práctica", creditos: 0 },
@@ -156,6 +148,66 @@
         { nombre: "EDU-490 · Trabajo de Grado", creditos: 4 }
       ]
     };
+
+    const malla = document.getElementById('malla');
+    const progresoContainer = document.getElementById('progreso-container');
+
+    function actualizarProgreso() {
+      let totalCreditos = 0;
+      let creditosCursados = 0;
+      let puntosTotales = 0;
+
+      document.querySelectorAll('select').forEach(select => {
+        const valor = select.value;
+        const creditos = parseFloat(select.dataset.creditos);
+        totalCreditos += creditos;
+        if (valor !== "") {
+          select.parentElement.classList.add('selecta');
+          creditosCursados += creditos;
+          puntosTotales += escala[valor] * creditos;
+        } else {
+          select.parentElement.classList.remove('selecta');
+        }
+      });
+
+      const progreso = totalCreditos > 0 ? (creditosCursados / totalCreditos * 100).toFixed(1) : 0;
+      const indice = creditosCursados > 0 ? (puntosTotales / creditosCursados).toFixed(2) : 0;
+      progresoContainer.textContent = `Progreso: ${progreso}% | Índice general: ${indice}`;
+    }
+
+    for (const periodo in pensum) {
+      const contenedor = document.createElement('div');
+      contenedor.className = 'periodo';
+      const titulo = document.createElement('h3');
+      titulo.textContent = `Periodo ${periodo}`;
+      contenedor.appendChild(titulo);
+
+      pensum[periodo].forEach(asignatura => {
+        const fila = document.createElement('div');
+        fila.className = 'asignatura';
+        fila.innerHTML = `
+          <span>${asignatura.nombre} (${asignatura.creditos} cr.)</span>
+          <select data-creditos="${asignatura.creditos}">
+            <option value="">--</option>
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
+            <option>D</option>
+            <option>F</option>
+          </select>
+        `;
+        contenedor.appendChild(fila);
+      });
+
+      malla.appendChild(contenedor);
+    }
+
+    document.querySelectorAll('select').forEach(select => {
+      select.addEventListener('change', actualizarProgreso);
+    });
+
+    actualizarProgreso();
   </script>
 </body>
 </html>
+
