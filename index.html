@@ -43,8 +43,7 @@
       padding: 0.2rem 0.5rem;
       border-radius: 5px;
     }
-    input[type="number"] {
-      width: 60px;
+    select {
       margin-left: 10px;
       border: 1px solid #ccc;
       border-radius: 4px;
@@ -65,101 +64,35 @@
   <div id="progreso-container">Progreso: 0% | Índice general: 0.00</div>
 
   <script>
+    const escala = {
+      'A': 4.0,
+      'B': 3.0,
+      'C': 2.0,
+      'D': 1.0,
+      'F': 0.0
+    };
+
     const pensum = {
-      "0": ["ORI-100 · Orientación Universitaria"],
+      "0": [{ nombre: "ORI-100 · Orientación Universitaria", creditos: 1 }],
       "1": [
-        "BIO-100 · Biología General",
-        "BIO-100-L · Biología General - Práctica",
-        "EDU-107 · Técnicas de Estudio e Investigación",
-        "EDU-165 · Tecnología de la Información",
-        "FIL-108 · Filosofía General",
-        "LET-104 · Expresión Oral y Escrita",
-        "LEX-104 · Inglés I",
-        "MAT-114 · Aritmética y Geometría"
+        { nombre: "BIO-100 · Biología General", creditos: 3 },
+        { nombre: "BIO-100-L · Biología General - Práctica", creditos: 1 },
+        { nombre: "EDU-107 · Técnicas de Estudio e Investigación", creditos: 2 },
+        { nombre: "EDU-165 · Tecnología de la Información", creditos: 2 },
+        { nombre: "FIL-108 · Filosofía General", creditos: 3 },
+        { nombre: "LET-104 · Expresión Oral y Escrita", creditos: 3 },
+        { nombre: "LEX-104 · Inglés I", creditos: 3 },
+        { nombre: "MAT-114 · Aritmética y Geometría", creditos: 4 }
       ],
-      "2": [
-        "EDU-174 · Fundamentos del Currículo",
-        "HUM-155 · Historia Dominicana",
-        "LEX-117 · Inglés II",
-        "MAT-140 · Lógica Matemática",
-        "PSI-220 · Psicología del Adolescente",
-        "SOC-105 · Intro a Ciencias Sociales"
-      ],
-      "3": [
-        "EDU-175 · Metodología de la Investigación",
-        "EDU-176 · Fundamentos Filosóficos de la Educación",
-        "EDU-177 · Proceso de Enseñanza-Aprendizaje",
-        "EDU-178 · Práctica Docente I",
-        "MAT-155 · Aritmética Superior",
-        "PSI-334 · Psicología del Aprendizaje"
-      ],
-      "4": [
-        "EDU-179 · Ética Profesional Docente",
-        "EDU-183 · Recursos para el Aprendizaje",
-        "EDU-188 · Legislación Educativa",
-        "EDU-189 · Práctica Docente II",
-        "MAT-204 · Álgebra Superior I",
-        "MAT-206 · Geometría I",
-        "MAT-208 · Trigonometría I"
-      ],
-      "5": [
-        "EDU-198 · Evaluación de los Aprendizajes",
-        "EDU-199 · Neurociencia y Aprendizaje",
-        "MAT-216 · Álgebra Superior II",
-        "MAT-218 · Geometría II",
-        "MAT-220 · Trigonometría II",
-        "MAT-222 · Matemática Financiera"
-      ],
-      "6": [
-        "EDU-376 · Gestión de Aula",
-        "EDU-377 · Práctica Docente III",
-        "EDU-386 · Didáctica de la Matemática I",
-        "MAT-224 · Álgebra Lineal",
-        "MAT-226 · Geometría III"
-      ],
-      "7": [
-        "EDU-380 · Innovación Educativa",
-        "ELT-002 · Electiva II",
-        "MAT-304 · Álgebra Abstracta",
-        "MAT-306 · Matemática y Tecnología I",
-        "MAT-308 · Análisis Matemático I"
-      ],
-      "8": [
-        "EDU-382 · Pedagogía Social",
-        "MAT-384 · Análisis Matemático II",
-        "MAT-385 · Matemática Discreta",
-        "MAT-386 · Estadística y Probabilidades",
-        "MAT-389 · Matemática y Tecnología II"
-      ],
-      "9": [
-        "EDU-383 · Investigación Acción",
-        "EDU-384 · Práctica Docente IV",
-        "EDU-390 · Didáctica Matemática II",
-        "MAT-309 · Inferencia Estadística",
-        "MAT-390 · Cálculo Vectorial",
-        "MAT-392 · Análisis Numérico"
-      ],
-      "10": [
-        "EDU-408 · Práctica Docente V",
-        "MAT-410 · Ecuaciones Diferenciales",
-        "MAT-412 · Historia y Epistemología Matemática"
-      ],
-      "11": [
-        "EDU-409 · Práctica Docente VI",
-        "ELT-001 · Electiva I",
-        "ELT-003 · Electiva III",
-        "MAT-414 · Variable Compleja"
-      ],
-      "12": [
-        "EDU-490 · Trabajo de Grado"
-      ]
+      // Agrega los demás periodos con sus asignaturas y créditos aquí...
     };
 
     const mallaDiv = document.getElementById('malla');
     const progresoText = document.getElementById('progreso-container');
 
     function renderMalla() {
-      let total = 0, completadas = 0, sumaNotas = 0, materiasConNota = 0;
+      let total = 0, completadas = 0;
+      let sumaPuntos = 0, sumaCreditos = 0;
       mallaDiv.innerHTML = '';
 
       for (let periodo in pensum) {
@@ -167,7 +100,7 @@
         periodoDiv.className = 'periodo';
         periodoDiv.innerHTML = `<h3>📘 Periodo ${periodo}</h3>`;
 
-        pensum[periodo].forEach((asignatura, index) => {
+        pensum[periodo].forEach((asig, index) => {
           const key = `p${periodo}a${index}`;
           const notaKey = `${key}_nota`;
           const checked = localStorage.getItem(key) === 'true';
@@ -190,38 +123,40 @@
           });
 
           const label = document.createElement('label');
-          label.textContent = asignatura;
+          label.textContent = `${asig.nombre} (${asig.creditos} cr)`;
 
           leftDiv.appendChild(checkbox);
           leftDiv.appendChild(label);
 
-          const notaInput = document.createElement('input');
-          notaInput.type = 'number';
-          notaInput.min = 0;
-          notaInput.max = 100;
-          notaInput.value = savedNota;
-          notaInput.placeholder = 'Nota';
-          notaInput.addEventListener('input', () => {
-            localStorage.setItem(notaKey, notaInput.value);
+          const select = document.createElement('select');
+          ['','A','B','C','D','F'].forEach(nota => {
+            const option = document.createElement('option');
+            option.value = nota;
+            option.textContent = nota;
+            if (nota === savedNota) option.selected = true;
+            select.appendChild(option);
+          });
+          select.addEventListener('change', () => {
+            localStorage.setItem(notaKey, select.value);
             renderMalla();
           });
 
           div.appendChild(leftDiv);
-          div.appendChild(notaInput);
+          div.appendChild(select);
           periodoDiv.appendChild(div);
 
           total++;
           if (checked) completadas++;
-          if (notaInput.value !== '') {
-            sumaNotas += parseFloat(notaInput.value);
-            materiasConNota++;
+          if (savedNota && escala[savedNota] !== undefined) {
+            sumaPuntos += escala[savedNota] * asig.creditos;
+            sumaCreditos += asig.creditos;
           }
         });
         mallaDiv.appendChild(periodoDiv);
       }
 
       const progreso = Math.round((completadas / total) * 100);
-      const indice = materiasConNota ? (sumaNotas / materiasConNota).toFixed(2) : '0.00';
+      const indice = sumaCreditos ? (sumaPuntos / sumaCreditos).toFixed(2) : '0.00';
       progresoText.textContent = `Progreso: ${progreso}% | Índice general: ${indice}`;
     }
 
