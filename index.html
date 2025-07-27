@@ -65,7 +65,7 @@
         { nombre: "BIO-100 · Biología General", creditos: 3 },
         { nombre: "BIO-100-L · Biología General - Práctica", creditos: 0 },
         { nombre: "EDU-107 · Técnicas de Estudio e Investigación", creditos: 3 },
-        { nombre: "EDU-165 · Tecnología de la Información", creditos: 3 },
+        { nombre: "EDU-165 · Tecnología de la Información", creditos: 2 },
         { nombre: "FIL-108 · Filosofía General", creditos: 3 },
         { nombre: "LET-104 · Expresión Oral y Escrita", creditos: 3 },
         { nombre: "LEX-104 · Inglés I", creditos: 3 },
