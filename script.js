@@ -1,9 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Malla Curricular – Licenciatura en Matemáticas UNPHU</title>
+  <title>¡Construyendo tu futuro matemático! 🎓💜</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -31,16 +30,25 @@
     .asignatura {
       display: flex;
       align-items: center;
+      justify-content: space-between;
       margin: 0.3rem 0;
+      flex-wrap: wrap;
     }
     input[type="checkbox"] {
-      margin-right: 0.8rem;
+      margin-right: 0.5rem;
       transform: scale(1.3);
     }
     .completada {
       background-color: #ce93d8;
       padding: 0.2rem 0.5rem;
       border-radius: 5px;
+    }
+    input[type="number"] {
+      width: 60px;
+      margin-left: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 3px;
     }
     #progreso-container {
       margin-top: 2rem;
@@ -50,11 +58,11 @@
   </style>
 </head>
 <body>
-  <h1>📘 Malla Curricular Interactiva</h1>
-  <p class="motivacion">¡Cada materia que completas es un paso más cerca de tu meta! 💪</p>
+  <h1>¡Construyendo tu futuro matemático! 🎓💜</h1>
+  <p class="motivacion">Cada materia, una meta. ¡Sigue adelante con pasión por enseñar! 📚</p>
 
   <div id="malla"></div>
-  <div id="progreso-container">Progreso: 0%</div>
+  <div id="progreso-container">Progreso: 0% | Índice general: 0.00</div>
 
   <script>
     const pensum = {
@@ -151,8 +159,7 @@
     const progresoText = document.getElementById('progreso-container');
 
     function renderMalla() {
-      let total = 0;
-      let completadas = 0;
+      let total = 0, completadas = 0, sumaNotas = 0, materiasConNota = 0;
       mallaDiv.innerHTML = '';
 
       for (let periodo in pensum) {
@@ -162,11 +169,17 @@
 
         pensum[periodo].forEach((asignatura, index) => {
           const key = `p${periodo}a${index}`;
+          const notaKey = `${key}_nota`;
           const checked = localStorage.getItem(key) === 'true';
+          const savedNota = localStorage.getItem(notaKey) || '';
 
           const div = document.createElement('div');
           div.className = 'asignatura';
           if (checked) div.classList.add('completada');
+
+          const leftDiv = document.createElement('div');
+          leftDiv.style.display = 'flex';
+          leftDiv.style.alignItems = 'center';
 
           const checkbox = document.createElement('input');
           checkbox.type = 'checkbox';
@@ -179,18 +192,37 @@
           const label = document.createElement('label');
           label.textContent = asignatura;
 
-          div.appendChild(checkbox);
-          div.appendChild(label);
+          leftDiv.appendChild(checkbox);
+          leftDiv.appendChild(label);
+
+          const notaInput = document.createElement('input');
+          notaInput.type = 'number';
+          notaInput.min = 0;
+          notaInput.max = 100;
+          notaInput.value = savedNota;
+          notaInput.placeholder = 'Nota';
+          notaInput.addEventListener('input', () => {
+            localStorage.setItem(notaKey, notaInput.value);
+            renderMalla();
+          });
+
+          div.appendChild(leftDiv);
+          div.appendChild(notaInput);
           periodoDiv.appendChild(div);
 
           total++;
           if (checked) completadas++;
+          if (notaInput.value !== '') {
+            sumaNotas += parseFloat(notaInput.value);
+            materiasConNota++;
+          }
         });
         mallaDiv.appendChild(periodoDiv);
       }
 
       const progreso = Math.round((completadas / total) * 100);
-      progresoText.textContent = `Progreso: ${progreso}%`;
+      const indice = materiasConNota ? (sumaNotas / materiasConNota).toFixed(2) : '0.00';
+      progresoText.textContent = `Progreso: ${progreso}% | Índice general: ${indice}`;
     }
 
     renderMalla();
