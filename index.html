@@ -69,7 +69,7 @@
         { nombre: "FIL-108 · Filosofía General", creditos: 3 },
         { nombre: "LET-104 · Expresión Oral y Escrita", creditos: 3 },
         { nombre: "LEX-104 · Inglés I", creditos: 3 },
-        { nombre: "MAT-114 · Aritmética y Geometría", creditos: 4 }
+        { nombre: "MAT-114 · Aritmética y Geometría", creditos: 3 }
       ],
       "2": [
         { nombre: "EDU-174 · Fundamentos del Currículo", creditos: 3 },
