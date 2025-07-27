@@ -77,7 +77,7 @@
         { nombre: "LEX-117 · Inglés II", creditos: 3 },
         { nombre: "MAT-140 · Lógica Matemática", creditos: 4 },
         { nombre: "PSI-220 · Psicología del Adolescente", creditos: 3 },
-        { nombre: "SOC-105 · Introducción a Ciencias Sociales", creditos: 3 }
+        { nombre: "SOC-105 · Introducción a Ciencias Sociales", creditos: 2 }
       ],
       "3": [
         { nombre: "EDU-175 · Metodología de la Investigación", creditos: 3 },
