@@ -91,7 +91,7 @@
         { nombre: "EDU-179 · Ética Profesional Docente", creditos: 2 },
         { nombre: "EDU-183 · Recursos para el Aprendizaje", creditos: 3 },
         { nombre: "EDU-188 · Legislación Educativa", creditos: 2 },
-        { nombre: "EDU-189 · Práctica Docente II", creditos: 1 },
+        { nombre: "EDU-189 · Práctica Docente II", creditos: 3 },
         { nombre: "MAT-204 · Álgebra Superior I", creditos: 4 },
         { nombre: "MAT-206 · Geometría I", creditos: 4 },
         { nombre: "MAT-208 · Trigonometría I", creditos: 4 }
