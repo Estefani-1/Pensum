@@ -98,10 +98,10 @@
       ],
       "5": [
         { nombre: "EDU-198 · Evaluación de los Aprendizajes", creditos: 3 },
-        { nombre: "EDU-199 · Neurociencia y Aprendizaje", creditos: 2 },
-        { nombre: "MAT-216 · Álgebra Superior II", creditos: 4 },
-        { nombre: "MAT-218 · Geometría II", creditos: 4 },
-        { nombre: "MAT-220 · Trigonometría II", creditos: 4 },
+        { nombre: "EDU-199 · Neurociencia y Aprendizaje", creditos: 3 },
+        { nombre: "MAT-216 · Álgebra Superior II", creditos: 3 },
+        { nombre: "MAT-218 · Geometría II", creditos: 3 },
+        { nombre: "MAT-220 · Trigonometría II", creditos: 3 },
         { nombre: "MAT-222 · Matemática Financiera", creditos: 3 }
       ],
       "6": [
