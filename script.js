@@ -1,72 +1,199 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>🎓 Malla Curricular UNPHU Matemática Secundaria</title>
-<style>
-  body { font-family: sans-serif; background:#f8f5fc; margin:20px; color:#333; }
-  h1 { color:#7e57c2; margin-bottom:5px; }
-  .motivation { font-style:italic; color:#6a1b9a; margin-bottom:15px; }
-  table { width:100%; border-collapse:collapse; margin-bottom:20px; }
-  th { background:#7e57c2; color:white; padding:10px; position:sticky; top:0; }
-  td { border:1px solid #ddd; padding:8px; text-align:center;}
-  tr:hover { background:#ede7f6; }
-  .period-header { background:#9575cd; color:white; text-align:left; font-size:1.1em; }
-  .completed { background:#d1c4e9 !important; }
-  .checkbox {transform:scale(1.2);}
-  #progress { font-weight:bold; color:#4a148c; margin-top:10px; }
-</style>
+  <meta charset="UTF-8">
+  <title>Malla Curricular – Licenciatura en Matemáticas UNPHU</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f9f7fc;
+      color: #333;
+      padding: 2rem;
+    }
+    h1 {
+      color: #6a1b9a;
+      text-align: center;
+    }
+    .motivacion {
+      text-align: center;
+      font-style: italic;
+      margin-bottom: 1.5rem;
+      color: #7b1fa2;
+    }
+    .periodo {
+      background-color: #f3e5f5;
+      border-left: 5px solid #6a1b9a;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+    }
+    .asignatura {
+      display: flex;
+      align-items: center;
+      margin: 0.3rem 0;
+    }
+    input[type="checkbox"] {
+      margin-right: 0.8rem;
+      transform: scale(1.3);
+    }
+    .completada {
+      background-color: #ce93d8;
+      padding: 0.2rem 0.5rem;
+      border-radius: 5px;
+    }
+    #progreso-container {
+      margin-top: 2rem;
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
-<h1>🎓 ¡Sigue avanzando hacia tu meta!</h1>
-<p class="motivation">Cada asignatura aprobada es un paso más cerca de ser un gran educador en matemáticas 🧮✨</p>
-<div id="progress">Progreso: 0%</div>
-<table id="malla">
-  <thead>
-    <tr><th>✓</th><th>Periodo</th><th>Código</th><th>Asignatura</th><th>CR</th><th>Pre‑Req</th></tr>
-  </thead>
-  <tbody>
-    <tr class="period-header"><td colspan="6">Periodo 1</td></tr>
-    <tr><td><input type="checkbox" class="checkbox"></td><td>1</td><td>PEG‑100</td><td>Fund. Filosóficos e Históricos de la Educación</td><td>4</td><td>—</td></tr>
-    <tr><td><input type="checkbox" class="checkbox"></td><td>1</td><td>CGE‑100</td><td>Expresión Oral y Producción Escrita</td><td>3</td><td>—</td></tr>
-    <tr><td><input type="checkbox" class="checkbox"></td><td>1</td><td>CGM‑100</td><td>Aritmética y Geometría</td><td>3</td><td>—</td></tr>
-    <tr><td><input type="checkbox" class="checkbox"></td><td>1</td><td>SIC‑110</td><td>Psicología del Desarrollo (12‑18 años)</td><td>3</td><td>—</td></tr>
-    <tr class="period-header"><td colspan="6">Periodo 2</td></tr>
-    <tr><td><input type="checkbox" class="checkbox"></td><td>2</td><td>PES‑100</td><td>Fundamentos y E estructura del Currículo</td><td>3</td><td>—</td></tr>
-    <tr><td><input type="checkbox" class="checkbox"></td><td>2</td><td>MAS‑100</td><td>Lógica y Teoría de Conjuntos</td><td>4</td><td>CGM‑100</td></tr>
-    <tr><td><input type="checkbox" class="checkbox"></td><td>2</td><td>SIC‑121</td><td>Psicología del Aprendizaje</td><td>3</td><td>—</td></tr>
-    <tr><td><input type="checkbox" class="checkbox"></td><td>2</td><td>CGS‑110</td><td>Historia Dominicana</td><td>3</td><td>CGS‑100</td></tr>
-    <tr><td><input type="checkbox" class="checkbox"></td><td>2</td><td>CGF‑100</td><td>Filosofía General</td><td>2</td><td>—</td></tr>
-    <tr class="period-header"><td colspan="6">Periodo 3</td></tr>
-    <tr><td><input type="checkbox" class="checkbox"></td><td>3</td><td>PES‑110</td><td>Procesos de Enseñanza‑Aprendizaje</td><td>4</td><td>PES‑100</td></tr>
-    <tr><td><input type="checkbox" class="checkbox"></td><td>3</td><td>PDS‑100</td><td>Práctica Docente I – Observación</td><td>2</td><td>—</td></tr>
-    <tr><td><input type="checkbox" class="checkbox"></td><td>3</td><td>MAS‑110</td><td>Aritmética Superior</td><td>3</td><td>MAS‑100</td></tr>
-    <tr><td><input type="checkbox" class="checkbox"></td><td>3</td><td>MAS‑130</td><td>Álgebra Superior I</td><td>3</td><td>MAS‑100</td></tr>
-    <tr><td><input type="checkbox" class="checkbox"></td><td>3</td><td>MAS‑140</td><td>Geometría I</td><td>3</td><td>MAS‑100</td></tr>
-    <tr><td><input type="checkbox" class="checkbox"></td><td>3</td><td>MAS‑120</td><td>Matemática Financiera</td><td>3</td><td>CGM‑100</td></tr>
-  </tbody>
-</table>
-<script>
-  const cbs = document.querySelectorAll('.checkbox');
-  const rows = document.querySelectorAll('#malla tbody tr');
-  function guardar(){ localStorage.setItem('malla', JSON.stringify(Array.from(cbs).map(cb=>cb.checked))); }
-  function cargar(){
-    const arr = JSON.parse(localStorage.getItem('malla'))||[];
-    arr.forEach((v,i)=>{ if(cbs[i]){ cbs[i].checked = v; if(v) rows[i+1+Math.floor(i/5)].classList.add('completed'); }});
-    actualizar();
-  }
-  function actualizar(){
-    const total = cbs.length;
-    const done = Array.from(cbs).filter(cb=>cb.checked).length;
-    document.getElementById('progress').textContent = `Progreso: ${Math.round(done/total*100)}%`;
-  }
-  cbs.forEach((cb,i)=> cb.addEventListener('change',()=>{
-    if(cb.checked) rows[i+1+Math.floor(i/5)].classList.add('completed');
-    else rows[i+1+Math.floor(i/5)].classList.remove('completed');
-    guardar(); actualizar();
-  }));
-  cargar();
-</script>
+  <h1>📘 Malla Curricular Interactiva</h1>
+  <p class="motivacion">¡Cada materia que completas es un paso más cerca de tu meta! 💪</p>
+
+  <div id="malla"></div>
+  <div id="progreso-container">Progreso: 0%</div>
+
+  <script>
+    const pensum = {
+      "0": ["ORI-100 · Orientación Universitaria"],
+      "1": [
+        "BIO-100 · Biología General",
+        "BIO-100-L · Biología General - Práctica",
+        "EDU-107 · Técnicas de Estudio e Investigación",
+        "EDU-165 · Tecnología de la Información",
+        "FIL-108 · Filosofía General",
+        "LET-104 · Expresión Oral y Escrita",
+        "LEX-104 · Inglés I",
+        "MAT-114 · Aritmética y Geometría"
+      ],
+      "2": [
+        "EDU-174 · Fundamentos del Currículo",
+        "HUM-155 · Historia Dominicana",
+        "LEX-117 · Inglés II",
+        "MAT-140 · Lógica Matemática",
+        "PSI-220 · Psicología del Adolescente",
+        "SOC-105 · Intro a Ciencias Sociales"
+      ],
+      "3": [
+        "EDU-175 · Metodología de la Investigación",
+        "EDU-176 · Fundamentos Filosóficos de la Educación",
+        "EDU-177 · Proceso de Enseñanza-Aprendizaje",
+        "EDU-178 · Práctica Docente I",
+        "MAT-155 · Aritmética Superior",
+        "PSI-334 · Psicología del Aprendizaje"
+      ],
+      "4": [
+        "EDU-179 · Ética Profesional Docente",
+        "EDU-183 · Recursos para el Aprendizaje",
+        "EDU-188 · Legislación Educativa",
+        "EDU-189 · Práctica Docente II",
+        "MAT-204 · Álgebra Superior I",
+        "MAT-206 · Geometría I",
+        "MAT-208 · Trigonometría I"
+      ],
+      "5": [
+        "EDU-198 · Evaluación de los Aprendizajes",
+        "EDU-199 · Neurociencia y Aprendizaje",
+        "MAT-216 · Álgebra Superior II",
+        "MAT-218 · Geometría II",
+        "MAT-220 · Trigonometría II",
+        "MAT-222 · Matemática Financiera"
+      ],
+      "6": [
+        "EDU-376 · Gestión de Aula",
+        "EDU-377 · Práctica Docente III",
+        "EDU-386 · Didáctica de la Matemática I",
+        "MAT-224 · Álgebra Lineal",
+        "MAT-226 · Geometría III"
+      ],
+      "7": [
+        "EDU-380 · Innovación Educativa",
+        "ELT-002 · Electiva II",
+        "MAT-304 · Álgebra Abstracta",
+        "MAT-306 · Matemática y Tecnología I",
+        "MAT-308 · Análisis Matemático I"
+      ],
+      "8": [
+        "EDU-382 · Pedagogía Social",
+        "MAT-384 · Análisis Matemático II",
+        "MAT-385 · Matemática Discreta",
+        "MAT-386 · Estadística y Probabilidades",
+        "MAT-389 · Matemática y Tecnología II"
+      ],
+      "9": [
+        "EDU-383 · Investigación Acción",
+        "EDU-384 · Práctica Docente IV",
+        "EDU-390 · Didáctica Matemática II",
+        "MAT-309 · Inferencia Estadística",
+        "MAT-390 · Cálculo Vectorial",
+        "MAT-392 · Análisis Numérico"
+      ],
+      "10": [
+        "EDU-408 · Práctica Docente V",
+        "MAT-410 · Ecuaciones Diferenciales",
+        "MAT-412 · Historia y Epistemología Matemática"
+      ],
+      "11": [
+        "EDU-409 · Práctica Docente VI",
+        "ELT-001 · Electiva I",
+        "ELT-003 · Electiva III",
+        "MAT-414 · Variable Compleja"
+      ],
+      "12": [
+        "EDU-490 · Trabajo de Grado"
+      ]
+    };
+
+    const mallaDiv = document.getElementById('malla');
+    const progresoText = document.getElementById('progreso-container');
+
+    function renderMalla() {
+      let total = 0;
+      let completadas = 0;
+      mallaDiv.innerHTML = '';
+
+      for (let periodo in pensum) {
+        const periodoDiv = document.createElement('div');
+        periodoDiv.className = 'periodo';
+        periodoDiv.innerHTML = `<h3>📘 Periodo ${periodo}</h3>`;
+
+        pensum[periodo].forEach((asignatura, index) => {
+          const key = `p${periodo}a${index}`;
+          const checked = localStorage.getItem(key) === 'true';
+
+          const div = document.createElement('div');
+          div.className = 'asignatura';
+          if (checked) div.classList.add('completada');
+
+          const checkbox = document.createElement('input');
+          checkbox.type = 'checkbox';
+          checkbox.checked = checked;
+          checkbox.addEventListener('change', () => {
+            localStorage.setItem(key, checkbox.checked);
+            renderMalla();
+          });
+
+          const label = document.createElement('label');
+          label.textContent = asignatura;
+
+          div.appendChild(checkbox);
+          div.appendChild(label);
+          periodoDiv.appendChild(div);
+
+          total++;
+          if (checked) completadas++;
+        });
+        mallaDiv.appendChild(periodoDiv);
+      }
+
+      const progreso = Math.round((completadas / total) * 100);
+      progresoText.textContent = `Progreso: ${progreso}%`;
+    }
+
+    renderMalla();
+  </script>
 </body>
 </html>
 
